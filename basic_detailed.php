@@ -10,9 +10,9 @@ function classifyAge(int  $age): string {
 	}
 }
 
-echo classifyAge(8)
-echo classifyAge(15)
-echo classifyAge(25)
+echo classifyAge(8);
+echo classifyAge(15);
+echo classifyAge(25);
 
 $cities = ["Москва", "Санкт-Петербург", "Казань", "Екатеринбург", "Чита"]
 foreach ($city in $cities){
@@ -30,3 +30,12 @@ for ($i = 0; $i < 100, $i++){
 		echo "Buzz";
 	}
 }
+
+function convertCelciusToFarenheit(float $celsius): float{
+	return (($celsius * 9 / 5) + 32);
+}
+
+echo convertCelsiusToFarenheit(0);
+echo convertCelsiusToFarenheit(25);
+echo convertCelsiusToFarenheit(-10);
+echo convertCelsiusToFarenheit(100);
