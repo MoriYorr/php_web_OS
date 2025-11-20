@@ -1,0 +1,17 @@
+[
+  {"file_id": 1, "name": "Documents", "parent_id": null},
+  {"file_id": 2, "name": "Photos", "parent_id": null},
+  {"file_id": 3, "name": "Work", "parent_id": 1},
+  {"file_id": 4, "name": "Personal", "parent_id": 1},
+  {"file_id": 5, "name": "Vacation", "parent_id": 2},
+  {"file_id": 6, "name": "ProjectA", "parent_id": 3},
+  {"file_id": 7, "name": "Report.docx", "parent_id": 3},
+  {"file_id": 8, "name": "Notes.txt", "parent_id": 4},
+  {"file_id": 9, "name": "Beach.jpg", "parent_id": 5},
+  {"file_id": 10, "name": "ProjectB", "parent_id": 3},
+  {"file_id": 11, "name": "Sketches", "parent_id": 2},
+  {"file_id": 12, "name": "Draft.pdf", "parent_id": 10},
+  {"file_id": 13, "name": "OldPhotos", "parent_id": 2},
+  {"file_id": 14, "name": "Winter.jpg", "parent_id": 13},
+  {"file_id": 15, "name": "Summer.jpg", "parent_id": 13}
+]
