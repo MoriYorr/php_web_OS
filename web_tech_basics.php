@@ -1,5 +1,4 @@
 <?php
-echo "Hello";
 function dumpRequestInfo(): void{
     echo '<pre>';
     echo 'Метод запроса: ' . htmlspecialchars($_SERVER['REQUEST_METHOD']) . "\n";
@@ -20,5 +19,23 @@ if (!empty($_POST)) {
 }
 
 dumpRequestInfo();
-echo "Hello";
+
+function getRequestData(): array {
+    // Собираем server_info
+    $serverInfo = [
+        'HTTP_HOST' => $_SERVER['HTTP_HOST'] ?? '',
+        'SERVER_NAME' => $_SERVER['SERVER_NAME'] ?? '',
+    ];
+    if (isset($_SERVER['HTTPS'])) {
+        $serverInfo['HTTPS'] = $_SERVER['HTTPS'];
+    }
+
+    // Возвращаем основной массив
+    return [
+        'method' => $_SERVER['REQUEST_METHOD'] ?? 'UNKNOWN',
+        'get' => $_GET,
+        'post' => $_POST,
+        'server_info' => $serverInfo,
+    ];
+}
 ?>
