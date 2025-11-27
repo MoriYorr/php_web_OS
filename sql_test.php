@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 $username = 'mori';  
 $password = 'fvthbrf900';  
 
@@ -116,3 +117,7 @@ $availableBooksAfterInsert = $stmt->fetchAll();
     </ul>
 </body>
 </html>
+=======
+
+?>
+>>>>>>> 9618ea01a6b3d5b9de2dcc0f0490bca773ff00a5
