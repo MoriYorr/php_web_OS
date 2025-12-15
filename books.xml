@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+  <book isbn="978-5-4461-1488-7">
+    <title>Создаем динамические веб-сайты на PHP</title>
+    <authors>
+      <author>Кевин Татро</author>
+      <author>Питер Макинтайр</author>
+    </authors>
+  </book>
+  <book isbn="978-5-97060-569-1">
+    <title>PHP и MySQL. Искусство программирования</title>
+    <authors>
+      <author>Люк Веллинг</author>
+      <author>Лора Томсон</author>
+    </authors>
+  </book>
+  <book isbn="978-5-4461-1972-1">
+    <title>Изучаем PHP 8</title>
+    <authors>
+      <author>Робин Никсон</author>
+    </authors>
+  </book>
+</catalog>

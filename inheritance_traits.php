@@ -68,15 +68,15 @@ function processBooking(Bookable $item): void {
 // ----------------------------
 // ЗАДАНИЕ 5 & 6: Трейты
 // ----------------------------
-trait PriceUtilities {
-    public function calculateTax(float $price): float {
-        return $price * 0.2;
-    }
-}
-
 trait IdentityTrait {
     public function generateId(): string {
         return uniqid();
+    }
+}
+
+trait PriceUtilities {
+    public function calculateTax(float $price): float {
+        return $price * 0.2;
     }
 }
 

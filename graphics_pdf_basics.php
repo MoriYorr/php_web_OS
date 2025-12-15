@@ -6,8 +6,8 @@ header('Content-Type: text/html; charset=utf-8');
 // Подключение FPDF (если не установлен через composer)
 // ——————————————————————————————————————————————
 if (!class_exists('FPDF')) {
-    if (file_exists(__DIR__ . '/fpdf.php')) {
-        require_once __DIR__ . '/fpdf.php';
+    if (file_exists(__DIR__ . '/FPDF/fpdf.php')) {
+        require_once __DIR__ . '/FPDF/fpdf.php';
     } else {
         die('Ошибка: FPDF не найден. Скачайте fpdf.php в корень проекта.');
     }
@@ -206,20 +206,20 @@ function renderSimplePdf(string $message): void
 }
 
 // ——————————————————————————————————————————————
-// 7–9. Класс InvoicePdf с колонтитулами, таблицей, логотипом и ссылкой
+// 7–9. InvoicePdf class with header, footer, table, logo, and link
 // ——————————————————————————————————————————————
 class InvoicePdf extends FPDF
 {
     function Header()
     {
-        // Логотип слева
+        // Logo on the left
         $logo = __DIR__ . '/logo.png';
         if (file_exists($logo)) {
             $this->Image($logo, 10, 10, 30);
         }
-        // Заголовок по центру
+        // Centered title
         $this->SetFont('Arial', 'B', 16);
-        $this->Cell(0, 10, 'Счёт', 0, 1, 'C');
+        $this->Cell(0, 10, 'Invoice', 0, 1, 'C');
         $this->Ln(5);
     }
 
@@ -227,7 +227,7 @@ class InvoicePdf extends FPDF
     {
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 8);
-        $this->Cell(0, 10, 'Страница ' . $this->PageNo(), 0, 0, 'C');
+        $this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
     }
 
     function buildTable(array $header, array $data): void
@@ -250,21 +250,27 @@ class InvoicePdf extends FPDF
     function renderInvoice(array $items): void
     {
         $this->AddPage();
-        $header = ['Товар', 'Кол-во', 'Цена', 'Сумма'];
+        $header = ['Item', 'Qty', 'Price', 'Total'];
         $this->buildTable($header, $items);
         $this->Ln(10);
-        // Гиперссылка
+        // Hyperlink
         $this->SetFont('Arial', 'U', 10);
         $this->SetTextColor(0, 0, 255);
-        $this->Write(5, 'Посетить сайт');
-        $this->Link($this->GetX() - $this->GetStringWidth('Посетить сайт'), $this->GetY() - 5, $this->GetStringWidth('Посетить сайт'), 5, 'https://example.com');
+        $this->Write(5, 'Visit website');
+        $this->Link(
+            $this->GetX() - $this->GetStringWidth('Visit website'),
+            $this->GetY() - 5,
+            $this->GetStringWidth('Visit website'),
+            5,
+            'https://example.com'
+        );
         $this->Output();
         exit;
     }
 }
 
 // ——————————————————————————————————————————————
-// 10. Итоговое домашнее задание: badge.php и PDF-счёт
+// 10. Final homework: badge.php and PDF invoice
 // ——————————————————————————————————————————————
 function runHomework(): void
 {
@@ -272,7 +278,7 @@ function runHomework(): void
         $name = trim($_GET['name'] ?? '');
         if (!preg_match('/^[a-zA-Zа-яА-ЯёЁ\s]{2,50}$/u', $name)) {
             http_response_code(400);
-            exit('Недопустимое имя');
+            exit('Invalid name');
         }
 
         $cacheDir = __DIR__ . '/cache';
@@ -310,63 +316,18 @@ function runHomework(): void
 
     if (isset($_GET['type']) && $_GET['type'] === 'invoice') {
         $items = [
-            ['Наушники', '2', '1500', '3000'],
-            ['Мышь', '1', '800', '800'],
-            ['Клавиатура', '1', '2500', '2500'],
-            ['Монитор', '1', '12000', '12000'],
-            ['Коврик', '3', '200', '600']
+            ['Headphones', '2', '1500', '3000'],
+            ['Mouse', '1', '800', '800'],
+            ['Keyboard', '1', '2500', '2500'],
+            ['Monitor', '1', '12000', '12000'],
+            ['Mouse Pad', '3', '200', '600']
         ];
         $pdf = new InvoicePdf();
         $pdf->renderInvoice($items);
         return;
     }
-}
-
-// ——————————————————————————————————————————————
-// HTML-интерфейс: последовательный вывод всех примеров
-// ——————————————————————————————————————————————
-if (php_sapi_name() !== 'cli' && (!isset($_GET['type']) || !in_array($_GET['type'], ['badge', 'invoice']))) {
     
-if (isset($_GET['type'])) {
-    // Проверка GD для графических операций
-    if (in_array($_GET['type'], ['black-square', 'text', 'ttf', 'button', 'badge']) && !extension_loaded('gd')) {
-        http_response_code(500);
-        exit('GD не установлен');
-    }
-
-    switch ($_GET['type']) {
-        case 'black-square':
-            renderBlackSquare();
-            exit;
-        case 'text':
-            renderTextImage($_GET['value'] ?? 'Пример');
-            exit;
-        case 'ttf':
-            renderTtfText($_GET['value'] ?? 'Тест', __DIR__ . '/arial.ttf');
-            exit;
-        case 'button':
-            renderButton($_GET['value'] ?? 'Кнопка', __DIR__ . '/badge-bg.png');
-            exit;
-        case 'badge':
-            runHomework();
-            exit;
-        case 'invoice':
-            $items = [
-                ['Наушники', '2', '1500', '3000'],
-                ['Мышь', '1', '800', '800'],
-                ['Клавиатура', '1', '2500', '2500'],
-                ['Монитор', '1', '12000', '12000'],
-                ['Коврик', '3', '200', '600']
-            ];
-            $pdf = new InvoicePdf();
-            $pdf->renderInvoice($items);
-            exit;
-        case 'simple-pdf':
-            renderSimplePdf('Это простой PDF-документ.');
-            exit;
-    }
 }
-
 // ——————————————————————————————————————————————
 // Потом: вывод HTML-страницы со всеми примерами
 // ——————————————————————————————————————————————
@@ -453,7 +414,6 @@ if (isset($_GET['type'])) {
 </html>
     <?php
     exit;
-}
 
 // Запуск домашнего задания (роутинг)
 runHomework();

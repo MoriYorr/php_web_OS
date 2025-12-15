@@ -147,7 +147,7 @@ $fullName = buildFullName("   Alex    ", "    Gordon    ");
 addBlock($output, "3. buildFullName — полное имя", $fullName);
 
 // 4. toTitleCase
-$title = toTitleCase("Fhjkhgdf fgkjhd fDJFHKJDS");
+$title = toTitleCase("эТо ПриМЕР ВВОДА");
 addBlock($output, "4. toTitleCase — заглавные буквы в словах", $title);
 
 // 5. extractFileName

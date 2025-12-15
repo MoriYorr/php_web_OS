@@ -185,6 +185,8 @@ setThemeCookie('dark');
 <h2>1. Информация о запросе</h2>
 <?php dumpRequestInfo(); ?>
 
+<?php initSession(); ?>
+
 <!-- 2. getRequestData -->
 <h2>2. Данные запроса через getRequestData()</h2>
 <pre><?= htmlspecialchars(print_r(getRequestData(), true)) ?></pre>

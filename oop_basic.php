@@ -234,8 +234,8 @@ $p2->name = "Misha";
 $p2->age = 12;
 
 addCardKeyValue($output, "1. Person", [
-    'Denis' => "Возраст: {$p1->age} лет",
-    'Misha' => "Возраст: {$p2->age} лет"
+    'Алексей' => "Возраст: {$p1->age} лет",
+    'Антипин' => "Возраст: {$p2->age} лет"
 ]);
 
 // 2. Product
